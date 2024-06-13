@@ -13,6 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+soong_namespace {
+    imports: ["device/generic/goldfish"],
+}
+
 package {
     default_applicable_licenses: ["device_generic_goldfish_audio_license"],
 }
@@ -31,7 +35,7 @@ license {
 }
 
 cc_defaults {
-    name: "android.hardware.audio@7.x-impl.ranchu_default",
+    name: "android.hardware.audio@7.x-impl.rpi_default",
     vendor: true,
     relative_install_path: "hw",
     defaults: ["hidl_defaults"],
@@ -76,28 +80,28 @@ cc_defaults {
 }
 
 cc_library_shared {
-    name: "android.hardware.audio.legacy@7.1-impl.ranchu",
+    name: "android.hardware.audio.legacy@7.1-impl.rpi",
     defaults: ["android.hardware.audio@7.1-impl_default"],
     relative_install_path: "hw",
     vendor: true,
 }
 
 cc_library_shared {
-    name: "android.hardware.audio@7.1-impl.ranchu",
-    defaults: ["android.hardware.audio@7.x-impl.ranchu_default"],
-    vintf_fragments: ["android.hardware.audio@7.1-impl.ranchu.xml"],
+    name: "android.hardware.audio@7.1-impl.rpi",
+    defaults: ["android.hardware.audio@7.x-impl.rpi_default"],
+    vintf_fragments: ["android.hardware.audio@7.1-impl.rpi.xml"],
     shared_libs: [
         "android.hardware.audio@7.1",
         "android.hardware.audio.common@7.1-enums",
     ],
     cflags: [
-        "-DLOG_TAG=\"android.hardware.audio@7.1-impl.ranchu\"",
+        "-DLOG_TAG=\"android.hardware.audio@7.1-impl.rpi\"",
         "-DMAJOR_VERSION=7",
         "-DMINOR_VERSION=1",
         "-DCOMMON_TYPES_MINOR_VERSION=0",
         "-DCORE_TYPES_MINOR_VERSION=0",
     ],
-    // a.h.audio@X.Y-impl.ranchu (see above) loads a.h.audio.legacy@X.Y-impl
+    // a.h.audio@X.Y-impl.rpi (see above) loads a.h.audio.legacy@X.Y-impl
     // which loads:
     //  - audio.r_submix.default which provides the r_submix device (b/161485545)
     //  - audio.bluetooth.default which provides the bluetooth device (b/228804498)
@@ -105,7 +109,7 @@ cc_library_shared {
     // deprecated libhardware modules listed above.
     //
     required: [
-        "android.hardware.audio.legacy@7.1-impl.ranchu",
+        "android.hardware.audio.legacy@7.1-impl.rpi",
         "audio.r_submix.default",
         "audio.bluetooth.default",
     ],

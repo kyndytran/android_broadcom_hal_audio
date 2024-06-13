@@ -39,7 +39,7 @@ using ::android::hardware::Void;
 
 DevicesFactory::DevicesFactory() {
     mLegacyLib.reset(dlopen(
-        LIB_PATH_PREFIX "android.hardware.audio.legacy@" STRINGIFY(FILE_VERSION) "-impl.ranchu.so",
+        LIB_PATH_PREFIX "android.hardware.audio.legacy@" STRINGIFY(FILE_VERSION) "-impl.rpi.so",
         RTLD_NOW));
     LOG_ALWAYS_FATAL_IF(!mLegacyLib);
 
